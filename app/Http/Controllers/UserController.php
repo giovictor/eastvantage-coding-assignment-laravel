@@ -7,10 +7,46 @@ use Illuminate\Support\Facades\{ DB, Exception };
 use App\Models\{ Role, User };
 use App\Http\Requests\UserRequest;
 
+/**
+ * @group Users
+ *
+ * Endpoints for managing users
+ */
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all users
+     *
+     * This endpoint will display all users along with their assigned roles.
+     * Users can also be filtered by roles.
+     *
+     * @queryParam roles integer[]
+     * The roles query parameter will filter users by role ids. <br><br>
+     * In this example, we have 4 role ids:
+     * <ol>
+     *      <li>Author</li>
+     *      <li>Editor</li>
+     *      <li>Subscriber</li>
+     *      <li>Administrator</li>
+     * </ol>
+     *
+     * In the example request, a role id of 3 and 4 is expected to display users with Subscriber and Administrator assigned as one of their role.
+     * Example: [3, 4]
+     *
+     * @response [
+     *      {
+     *          id: 2,
+     *          name: 'Kawhi Leonard',
+     *          email: 'kawhi.leonard@nba.com',
+     *          roles: 'Administrator,Editor'
+     *      },
+     *      {
+     *          id: 1,
+     *          name: 'Paul George',
+     *          email: 'paul.george@nba.com',
+     *          roles: 'Subscriber'
+     *      }
+     * ]
      */
     public function index(Request $request)
     {
@@ -25,7 +61,33 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new user
+     *
+     * This endpoint will create a new user.
+     * A new user can have multiple roles.
+     *
+     * @bodyParam name string required The full name of the user. Example: LeBron James
+     * @bodyParam email string required The email address of the user. Example: lebron.james@nba.com
+     * @bodyParam roles integer[] required The role ids that will be assigned to the user. <br><br>
+     * In this example, we have 4 role ids:
+     * <ol>
+     *      <li>Author</li>
+     *      <li>Editor</li>
+     *      <li>Subscriber</li>
+     *      <li>Administrator</li>
+     * </ol>
+     * Example: [1,4]
+     *
+     * @response 201
+     *  {
+     *      message: 'User has been created.',
+     *      data: {
+     *          id: 3,
+     *          name: 'LeBron James',
+     *          email: 'lebron.james@nba.com',
+     *          user_roles: 'Author,Administrator'
+     *      }
+     *  }
      */
     public function store(UserRequest $request)
     {
@@ -49,7 +111,19 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get a user
+     *
+     * This endpoint will retrieve a user by id.
+     *
+     * @urlParam id integer required The ID of the user. Example: 3
+     *
+     * @response
+     *  {
+     *      id: 3,
+     *      name: 'LeBron James',
+     *      email: 'lebron.james@nba.com',
+     *      user_roles: 'Author,Administrator'
+     *  }
      */
     public function show(User $user)
     {
@@ -63,7 +137,33 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a user
+     *
+     * This endpoint will update a user.
+     *
+     * @urlParam id integer required The ID of the user. Example: 3
+     * @bodyParam name string required The full name of the user. Example: LeBron James
+     * @bodyParam email string required The email address of the user. Example: lebron.james@nba.com
+     * @bodyParam roles integer[] required The role ids that will be assigned to the user. <br><br>
+     * In this example, we have 4 role ids:
+     * <ol>
+     *      <li>Author</li>
+     *      <li>Editor</li>
+     *      <li>Subscriber</li>
+     *      <li>Administrator</li>
+     * </ol>
+     * Example: [2,3]
+     *
+     * @response
+     *  {
+     *      message: 'User has been updated.',
+     *      data: {
+     *          id: 3,
+     *          name: 'LeBron James',
+     *          email: 'lebron.james@nba.com',
+     *          user_roles: 'Editor,Subscriber'
+     *      }
+     *  }
      */
     public function update(UserRequest $request, User $user)
     {
@@ -87,7 +187,16 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a user
+     *
+     * This endpoint will delete a user along with their assigned roles.
+     *
+     * @urlParam id integer required The ID of the user. Example: 3
+     *
+     * @response
+     *  {
+     *      message: 'User has been deleted.'
+     *  }
      */
     public function destroy(User $user)
     {

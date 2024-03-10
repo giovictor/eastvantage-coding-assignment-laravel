@@ -7,10 +7,44 @@ use Illuminate\Support\Facades\{ DB, Exception };
 use App\Models\{ Role, RoleUser };
 use App\Http\Requests\RoleRequest;
 
+/**
+ * @group Roles
+ *
+ * Endpoints for managing roles
+ */
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all roles
+     *
+     * This endpoint will display all roles.
+     *
+     * @response [
+     *  {
+     *      id: 1,
+     *      role: 'Author',
+     *      created_at: '2024-03-09T18:05:06.000000Z',
+     *      updated_at: '2024-03-09T18:05:06.000000Z'
+     *  },
+     *  {
+     *      id: 2,
+     *      role: 'Editor',
+     *      created_at: '2024-03-09T18:05:06.000000Z',
+     *      updated_at: '2024-03-09T18:05:06.000000Z'
+     *  },
+     *
+     *      id: 3,
+     *      role: 'Subscriber',
+     *      created_at: '2024-03-09T18:05:07.000000Z',
+     *      updated_at: '2024-03-09T18:05:07.000000Z'
+     *  },
+     *
+     *      id: 4,
+     *      role: 'Administrator',
+     *      created_at: '2024-03-09T18:05:07.000000Z',
+     *      updated_at: '2024-03-09T18:05:07.000000Z'
+     *  },
+     * ]
      */
     public function index()
     {
@@ -25,7 +59,22 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new role
+     *
+     * This endpoint will create a new role.
+     *
+     * @bodyParam role string required The name of the role. Example: Moderator
+     *
+     * @response 201
+     *  {
+     *      message: 'Role has been created.',
+     *      data: {
+     *          id: 5,
+     *          role: 'Moderator',
+     *          created_at: '2024-03-10T03:47:31.000000Z',
+     *          updated_at: '2024-03-10T03:47:31.000000Z'
+     *      }
+     *  }
      */
     public function store(RoleRequest $request)
     {
@@ -48,8 +97,20 @@ class RoleController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
+     /**
+     * Get a role
+     *
+     * This endpoint will retrieve a role by id.
+     *
+     * @urlParam id integer required The ID of the role. Example: 5
+     *
+     * @response
+     *  {
+     *      id: 5,
+     *      role: 'Moderator',
+     *      created_at: '2024-03-10T03:47:31.000000Z',
+     *      updated_at: '2024-03-10T03:47:31.000000Z'
+     *  }
      */
     public function show(Role $role)
     {
@@ -63,7 +124,23 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a role
+     *
+     * This endpoint will update a role.
+     *
+     * @urlParam id integer required The ID of the role. Example: 5
+     * @bodyParam role string required The name of the role. Example: Coordinator
+     *
+     * @response
+     *  {
+     *      message: 'Role has been updated.',
+     *      data: {
+     *          id: 5,
+     *          role: 'Coordinator',
+     *          created_at: '2024-03-10T03:47:31.000000Z',
+     *          updated_at: '2024-03-10T03:47:31.000000Z'
+     *      }
+     *  }
      */
     public function update(RoleRequest $request, Role $role)
     {
@@ -87,7 +164,16 @@ class RoleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a role
+     *
+     * This endpoint will delete a role. Deleting a role will also unassign it to users.
+     *
+     * @urlParam id integer required The ID of the role. Example: 5
+     *
+     * @response
+     *  {
+     *      message: 'Role has been deleted.'
+     *  }
      */
     public function destroy(Role $role)
     {

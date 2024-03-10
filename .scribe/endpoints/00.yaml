@@ -1,0 +1,379 @@
+name: Users
+description: |-
+
+  Endpoints for managing users
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/users
+    metadata:
+      groupName: Users
+      groupDescription: |-
+
+        Endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get all users'
+      description: |-
+        This endpoint will display all users along with their assigned roles.
+        Users can also be filtered by roles.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      roles:
+        name: roles
+        description: |-
+          The roles query parameter will filter users by role ids. <br><br>
+          In this example, we have 4 role ids:
+          <ol>
+               <li>Author</li>
+               <li>Editor</li>
+               <li>Subscriber</li>
+               <li>Administrator</li>
+          </ol>
+
+          In the example request, a role id of 3 and 4 is expected to display users with Subscriber and Administrator assigned as one of their role.
+        required: false
+        example:
+          - 3
+          - 4
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanQueryParameters:
+      roles:
+        - 3
+        - 4
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [
+               {
+                   id: 2,
+                   name: 'Kawhi Leonard',
+                   email: 'kawhi.leonard@nba.com',
+                   roles: 'Administrator,Editor'
+               },
+               {
+                   id: 1,
+                   name: 'Paul George',
+                   email: 'paul.george@nba.com',
+                   roles: 'Subscriber'
+               }
+          ]
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/users
+    metadata:
+      groupName: Users
+      groupDescription: |-
+
+        Endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a new user'
+      description: |-
+        This endpoint will create a new user.
+        A new user can have multiple roles.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The full name of the user.'
+        required: true
+        example: 'LeBron James'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      email:
+        name: email
+        description: 'The email address of the user.'
+        required: true
+        example: lebron.james@nba.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      roles:
+        name: roles
+        description: |-
+          The role ids that will be assigned to the user. <br><br>
+          In this example, we have 4 role ids:
+          <ol>
+               <li>Author</li>
+               <li>Editor</li>
+               <li>Subscriber</li>
+               <li>Administrator</li>
+          </ol>
+        required: true
+        example:
+          - 1
+          - 4
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      name: 'LeBron James'
+      email: lebron.james@nba.com
+      roles:
+        - 1
+        - 4
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+               message: 'User has been created.',
+               data: {
+                   id: 3,
+                   name: 'LeBron James',
+                   email: 'lebron.james@nba.com',
+                   user_roles: 'Author,Administrator'
+               }
+           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{id}'
+    metadata:
+      groupName: Users
+      groupDescription: |-
+
+        Endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get a user'
+      description: 'This endpoint will retrieve a user by id.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+               id: 3,
+               name: 'LeBron James',
+               email: 'lebron.james@nba.com',
+               user_roles: 'Author,Administrator'
+           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/users/{id}'
+    metadata:
+      groupName: Users
+      groupDescription: |-
+
+        Endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a user'
+      description: 'This endpoint will update a user.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The full name of the user.'
+        required: true
+        example: 'LeBron James'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      email:
+        name: email
+        description: 'The email address of the user.'
+        required: true
+        example: lebron.james@nba.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      roles:
+        name: roles
+        description: |-
+          The role ids that will be assigned to the user. <br><br>
+          In this example, we have 4 role ids:
+          <ol>
+               <li>Author</li>
+               <li>Editor</li>
+               <li>Subscriber</li>
+               <li>Administrator</li>
+          </ol>
+        required: true
+        example:
+          - 2
+          - 3
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      name: 'LeBron James'
+      email: lebron.james@nba.com
+      roles:
+        - 2
+        - 3
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+               message: 'User has been updated.',
+               data: {
+                   id: 3,
+                   name: 'LeBron James',
+                   email: 'lebron.james@nba.com',
+                   user_roles: 'Editor,Subscriber'
+               }
+           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/users/{id}'
+    metadata:
+      groupName: Users
+      groupDescription: |-
+
+        Endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a user'
+      description: 'This endpoint will delete a user along with their assigned roles.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+               message: 'User has been deleted.'
+           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
