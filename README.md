@@ -9,6 +9,8 @@ User and role management system built with Laravel and Laravel Sail.
 ## Requirements
 * Docker Desktop
 * WSL2 (Windows)
+* PHP
+* Composer
 
 If using Windows, I recommend to clone it inside the actual WSL2 distro instead of Windows file explorer or `/mnt` folder for better API performance.
 
@@ -48,7 +50,12 @@ DB_PASSWORD=password
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 
-5. Start the containers (Laravel and MySQL)
+5. Install dependencies via composer
+```
+composer install
+```
+
+6. Start the containers (Laravel and MySQL)
 ```
 sail up -d
 ```
@@ -58,14 +65,14 @@ Check if both containers are running
 sail ps
 ```
 
-6. Generate application key for Laravel then clear cache
+7. Generate application key for Laravel then clear cache
 ```
 sail artisan key:generate
 
 sail artisan optimize:clear
 ```
 
-7. Run the database migrations to generate tables in the local database
+8. Run the database migrations to generate tables in the local database
 ```
 sail artisan migrate
 ```
@@ -75,7 +82,7 @@ Check status of migration
 sail artisan migrate:status
 ```
 
-8. Run the database seeders to create test users and the initial roles data
+9. Run the database seeders to create test users and the initial roles data
 ```
 sail artisan db:seed
 ```
