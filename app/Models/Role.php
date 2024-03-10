@@ -12,4 +12,26 @@ class Role extends Model
     protected $fillable = [
         'role',
     ];
+
+    public static function createRole($request)
+    {
+        $role = self::create([
+            'role' => $request['role']
+        ]);
+
+        return $role;
+    }
+
+    public static function updateRole($request, $role)
+    {
+        $role->update([
+            'role' => $request['role']
+        ]);
+    }
+
+    public static function deleteRole($role)
+    {
+        RoleUser::deleteRoles($role->id);
+        $role->delete();
+    }
 }

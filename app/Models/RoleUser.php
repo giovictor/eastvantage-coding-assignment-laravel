@@ -56,4 +56,9 @@ class RoleUser extends Model
     {
         self::where('user_id', $userId)->delete();
     }
+
+    public static function deleteRoles($roleId)
+    {
+        self::where('role_id', $roleId)->delete();
+    }
 }

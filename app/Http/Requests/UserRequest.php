@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                !empty($this->user->id) ? Rule::unique('users')->ignore($this->user->id) : Rule::unique('users')
+                !empty($this->route()->user->id) ? Rule::unique('users')->ignore($this->route()->user->id) : Rule::unique('users')
             ],
             'roles' => 'required|array',
             'roles.*' => Rule::in($roleIds)
@@ -40,7 +40,7 @@ class UserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'roles.*.in' => 'There is an invalid role.'
+            'roles.*.in' => 'Invalid role for item #:position.'
         ];
     }
 }

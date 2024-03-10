@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Exception };
-use App\Models\{ Role, User };
-use App\Http\Requests\UserRequest;
+use App\Models\{ Role, RoleUser };
+use App\Http\Requests\RoleRequest;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         try {
-            $users = User::getUsers($request->roles);
-            return response()->json($users, 200);
+            $roles = Role::orderBy('id', 'asc')->get();
+            return response()->json($roles, 200);
         } catch(Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
@@ -27,17 +27,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(RoleRequest $request)
     {
         DB::beginTransaction();
 
         try {
-            $user = User::createUser($request->all());
+            $role = Role::createRole($request->all());
             DB::commit();
 
             return response()->json([
-                'message' => 'User has been created.',
-                'data' => User::getUser($user->id)
+                'message' => 'Role has been created.',
+                'data' => $role
             ], 201);
         } catch(Exception $e) {
             DB::rollBack();
@@ -51,10 +51,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Role $role)
     {
         try {
-            return response()->json(User::getUser($user->id), 200);
+            return response()->json($role, 200);
         } catch(Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
@@ -65,17 +65,17 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, User $user)
+    public function update(RoleRequest $request, Role $role)
     {
         DB::beginTransaction();
 
         try {
-            User::updateUser($request->all(), $user);
+            Role::updateRole($request->all(), $role);
             DB::commit();
 
             return response()->json([
-                'message' => 'User has been updated.',
-                'data' => User::getUser($user->id)
+                'message' => 'Role has been updated.',
+                'data' => $role
             ], 200);
         } catch(Exception $e) {
             DB::rollBack();
@@ -89,16 +89,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Role $role)
     {
         DB::beginTransaction();
 
         try {
-            User::deleteUser($user);
+            Role::deleteRole($role);
             DB::commit();
 
             return response()->json([
-                'message' => 'User has been deleted.',
+                'message' => 'Role has been deleted.'
             ], 200);
         } catch(Exception $e) {
             DB::rollBack();

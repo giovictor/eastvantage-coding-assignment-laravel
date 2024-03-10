@@ -51,7 +51,7 @@ class User extends Authenticatable
                 'users.id',
                 'name',
                 'email',
-                DB::raw("(SELECT GROUP_CONCAT(roles.role) FROM roles JOIN role_user ON roles.id = role_user.role_id WHERE role_user.user_id = users.id) AS user_roles")
+                DB::raw("(SELECT GROUP_CONCAT(roles.role ORDER BY roles.id) FROM roles JOIN role_user ON roles.id = role_user.role_id WHERE role_user.user_id = users.id) AS user_roles")
             ])
             ->orderBy('users.id', 'desc')
             ->groupBy(['users.id', 'name', 'email']);
