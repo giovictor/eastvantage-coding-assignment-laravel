@@ -38,13 +38,15 @@ class UserController extends Controller
      *          id: 2,
      *          name: 'Kawhi Leonard',
      *          email: 'kawhi.leonard@nba.com',
-     *          roles: 'Administrator,Editor'
+     *          user_roles: 'Editor,Administrator',
+     *          user_roles_id: '2,4'
      *      },
      *      {
      *          id: 1,
      *          name: 'Paul George',
      *          email: 'paul.george@nba.com',
-     *          roles: 'Subscriber'
+     *          user_roles: 'Subscriber',
+     *          user_roles_id: '3'
      *      }
      * ]
      */
@@ -85,7 +87,8 @@ class UserController extends Controller
      *          id: 3,
      *          name: 'LeBron James',
      *          email: 'lebron.james@nba.com',
-     *          user_roles: 'Author,Administrator'
+     *          user_roles: 'Author,Administrator',
+     *          user_roles_id: '1,4'
      *      }
      *  }
      */
@@ -122,7 +125,8 @@ class UserController extends Controller
      *      id: 3,
      *      name: 'LeBron James',
      *      email: 'lebron.james@nba.com',
-     *      user_roles: 'Author,Administrator'
+     *      user_roles: 'Author,Administrator',
+     *      user_roles_id: '1,4'
      *  }
      */
     public function show(User $user)
@@ -161,7 +165,8 @@ class UserController extends Controller
      *          id: 3,
      *          name: 'LeBron James',
      *          email: 'lebron.james@nba.com',
-     *          user_roles: 'Editor,Subscriber'
+     *          user_roles: 'Editor,Subscriber',
+     *          user_roles_id: '2,3'
      *      }
      *  }
      */

@@ -187,13 +187,15 @@ fetch(url, {
          id: 2,
          name: &#039;Kawhi Leonard&#039;,
          email: &#039;kawhi.leonard@nba.com&#039;,
-         roles: &#039;Administrator,Editor&#039;
+         user_roles: &#039;Editor,Administrator&#039;,
+         user_roles_id: &#039;2,4&#039;
      },
      {
          id: 1,
          name: &#039;Paul George&#039;,
          email: &#039;paul.george@nba.com&#039;,
-         roles: &#039;Subscriber&#039;
+         user_roles: &#039;Subscriber&#039;,
+         user_roles_id: &#039;3&#039;
      }
 ]</code>
  </pre>
@@ -341,7 +343,8 @@ fetch(url, {
          id: 3,
          name: &#039;LeBron James&#039;,
          email: &#039;lebron.james@nba.com&#039;,
-         user_roles: &#039;Author,Administrator&#039;
+         user_roles: &#039;Author,Administrator&#039;,
+         user_roles_id: &#039;1,4&#039;
      }
  }</code>
  </pre>
@@ -488,7 +491,8 @@ fetch(url, {
      id: 3,
      name: &#039;LeBron James&#039;,
      email: &#039;lebron.james@nba.com&#039;,
-     user_roles: &#039;Author,Administrator&#039;
+     user_roles: &#039;Author,Administrator&#039;,
+     user_roles_id: &#039;1,4&#039;
  }</code>
  </pre>
     </span>
@@ -624,7 +628,8 @@ fetch(url, {
          id: 3,
          name: &#039;LeBron James&#039;,
          email: &#039;lebron.james@nba.com&#039;,
-         user_roles: &#039;Editor,Subscriber&#039;
+         user_roles: &#039;Editor,Subscriber&#039;,
+         user_roles_id: &#039;2,3&#039;
      }
  }</code>
  </pre>
