@@ -45,14 +45,14 @@ DB_USERNAME=sail
 DB_PASSWORD=password
 ```
 
-4. Assign  alias for `sail` command
-```
-alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
-```
-
-5. Install dependencies via composer
+4. Install dependencies via composer
 ```
 composer install
+```
+
+5. Assign  alias for `sail` command
+```
+alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 
 6. Start the containers (Laravel and MySQL)
